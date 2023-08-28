@@ -84,7 +84,7 @@ function writeToFile(fileName, data) {
 function init() {
   inquirer.prompt(questions).then((responses) => {
     console.log("Creating Professional README.md File...");
-    writeToFile(".MacintoshHD/Users/andressolorio/README-generator/sampleREADME", generateMarkdown({ ...responses }));
+    writeToFile("./sampleREADME", generateMarkdown({ ...responses }));
   });
 }
 init();
