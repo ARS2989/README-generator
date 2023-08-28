@@ -77,14 +77,19 @@ const questions = [
 
 // Writing README.md File
 function writeToFile(fileName, data) {
-  return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+  fs.writeFile(fileName, generateMarkdown(data), function (err) {
+      if (err) {
+          return console.log(err);
+      }
+  });
 }
 
 // Initializing app
 function init() {
-  inquirer.prompt(questions).then((responses) => {
-    console.log("Creating Professional README.md File...");
-    writeToFile("./dist/README.md", generateMarkdown({ ...responses }));
+  inquirer.prompt(questions).then((data) => {
+      console.log(JSON.stringify(data, null, " "));
+      data.getLicense = getLicense(data.license);
+      writeToFile("./example/README.md", data);
   });
 }
 init();
